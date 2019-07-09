@@ -76,12 +76,9 @@ class InfoManager(BaseManager):
 
     @property
     def version(self):
-        value = self._get_value(self.SERVER_VERSION_RE)
-        if value:
-            match = self.VERSION_NUMBER_RE.match(value)
-            if match:
-                return match.group()
-
+        version_match = self.VERSION_NUMBER_RE.match(self.go_server_version)
+        if version_match:
+            return version_match.group()
 
     def support(self):
         """
