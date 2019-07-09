@@ -50,13 +50,7 @@ class InfoManager(BaseManager):
     you can use yagocd.resources.version.VersionManager class.
     """
 
-    SERVER_VERSION_RE = re.compile(r'Server Version')
     VERSION_NUMBER_RE = re.compile(r'[\d.-]+')
-
-    JVM_VERSION_RE = re.compile(r'JVM version')
-    OS_INFO_RE = re.compile(r'OS Information')
-    ARTIFACT_FREE_SPACE_RE = re.compile(r'Usable space in artifacts repository')
-    DB_SCHEMA_VERSION_RE = re.compile(r'Database schema version')
 
     def __init__(self, session):
         super(InfoManager, self).__init__(session)
@@ -89,21 +83,6 @@ class InfoManager(BaseManager):
             if match:
                 return match.group()
 
-    @property
-    def jvm_version(self):
-        return self._get_value(self.JVM_VERSION_RE)
-
-    @property
-    def os_info(self):
-        return self._get_value(self.OS_INFO_RE)
-
-    @property
-    def artifact_free_space(self):
-        return self._get_value(self.ARTIFACT_FREE_SPACE_RE)
-
-    @property
-    def db_schema_version(self):
-        return self._get_value(self.DB_SCHEMA_VERSION_RE)
 
     def support(self):
         """
