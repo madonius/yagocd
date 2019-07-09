@@ -63,17 +63,16 @@ class InfoManager(BaseManager):
         )
         return result.text
 
-    def _get_value(self, regex):
-        if not self._parsed:
-            content = self._get_about_page()
+    def _get_server_info(self):
+        about_page = BeautifulSoup(self._get_about_page())
+        server_info = json.loads(about_page.body.attrs['data-meta'])
+        self.go_server_version = server_info['go_server_version']
+        self.jvm_version = server_info['jvm_version']
+        self.os_info = server_info['os_information']
+        self.artifact_free_space = server_info['usable_space_in_artifacts_repository']
+        self.db_schema_version = server_info['database_schema_version']
 
-            parser.feed(content)
-
-            self._parsed = dict(zip(parser.data[0::2], parser.data[1::2]))
-
-        for title, value in self._parsed.items():
-            if regex.search(title):
-                return value
+        return server_info
 
     @property
     def version(self):
