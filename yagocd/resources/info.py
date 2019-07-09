@@ -37,24 +37,6 @@ from yagocd.resources import BaseManager
 from yagocd.util import since
 
 
-class AboutPageTableParser(html_parser.HTMLParser):
-    def __init__(self):
-        html_parser.HTMLParser.__init__(self)
-        self._in_td = False
-        self.data = list()
-
-    def handle_starttag(self, tag, attrs):
-        if tag == 'td':
-            self._in_td = True
-
-    def handle_data(self, data):
-        if self._in_td:
-            self.data.append(data)
-
-    def handle_endtag(self, tag):
-        self._in_td = False
-
-
 @since('19.5.0')
 class InfoManager(BaseManager):
     """
@@ -91,7 +73,6 @@ class InfoManager(BaseManager):
         if not self._parsed:
             content = self._get_about_page()
 
-            parser = AboutPageTableParser()
             parser.feed(content)
 
             self._parsed = dict(zip(parser.data[0::2], parser.data[1::2]))
