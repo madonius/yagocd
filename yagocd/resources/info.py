@@ -55,14 +55,14 @@ class AboutPageTableParser(html_parser.HTMLParser):
         self._in_td = False
 
 
-@since('14.3.0')
+@since('19.5.0')
 class InfoManager(BaseManager):
     """
     Class for getting general information about GoCD server.
     Mostly this class returns some system information about the
     server and not assumed to be used often.
 
-    :versionadded: 14.3.0.
+    :versionadded: 19.5.0.
 
     Right now this class just parses /about page, for more robust approach
     you can use yagocd.resources.version.VersionManager class.
