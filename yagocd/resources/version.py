@@ -33,7 +33,16 @@ from yagocd.util import since
 
 class VersionManager(BaseManager):
     """
-    The Version API allows users to get the GoCD server version details.
+
+    @property
+    def raw_data(self):
+        if not hasattr(self, '_raw_data'):
+            self._raw_data = self.get()
+        return self._raw_data
+
+    @property
+    def version(self):
+        return self.raw_data.version
 
     `Official documentation. <https://api.go.cd/current/#version>`_
 
