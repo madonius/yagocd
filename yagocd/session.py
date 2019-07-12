@@ -34,6 +34,7 @@ from six.moves.urllib.parse import urljoin
 
 from yagocd.exception import RequestError
 
+
 class Session(object):
     """
     Class for working with sessions.
