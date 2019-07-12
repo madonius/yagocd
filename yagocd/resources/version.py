@@ -28,7 +28,6 @@
 from easydict import EasyDict
 
 from yagocd.resources import BaseManager
-from yagocd.util import since
 
 
 class VersionManager(BaseManager):
