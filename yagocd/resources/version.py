@@ -55,5 +55,3 @@ class VersionManager(BaseManager):
     @property
     def version(self):
         return self.raw_data.version
-
-
